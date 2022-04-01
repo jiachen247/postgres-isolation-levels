@@ -1,7 +1,7 @@
 -- $ psql -d isolation_exp -f 1-init_tables.sql
 DROP TABLE IF EXISTS stocks;
-DROP TABLE IF EXISTS sumtable ;
-DROP TABLE IF EXISTS execution ;
+DROP TABLE IF EXISTS sumtable;
+DROP TABLE IF EXISTS execution;
 
 CREATE TABLE stocks (
 	s_id SERIAL PRIMARY KEY,
@@ -15,5 +15,5 @@ CREATE TABLE sumtable(
 );
 
 CREATE TABLE execution(
-	execution VARCHAR(50)
+	execution REAL
 );

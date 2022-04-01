@@ -1,3 +1,3 @@
--- $ psql -f init_db.sql
+-- $ psql -f 1-init_db.sql
+DROP DATABASE isolation_exp;
 CREATE DATABASE isolation_exp;
-\c isolation_exp
