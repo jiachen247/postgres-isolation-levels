@@ -7,7 +7,7 @@ CREATE TABLE stocks (
 	s_id SERIAL PRIMARY KEY,
   w_id INTEGER,
   i_id INTEGER,
-  s_qty INTEGER CHECK(s_qty > 0)
+  s_qty INTEGER
 );
 
 CREATE TABLE sumtable(

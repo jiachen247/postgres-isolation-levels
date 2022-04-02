@@ -1,16 +1,15 @@
 -- $ psql -d isolation_exp -f INit_procs.sql
--- 1000 is configurable (number of iterations)
---- sqty INit to 10000
-CREATE OR REPLACE PROCEDURE updateTransaction()
+-- transfer 20 from src to dest
+CREATE OR REPLACE PROCEDURE transferQty(src INT, dest INT)
 LANGUAGE plpgsql    
 AS $$
 BEGIN
-FOR i IN 1..1000
+	FOR i IN 1..100
   LOOP
-    UPDATE stocks SET s_qty=s_qty-2 WHERE mod(s_id,2)=0;
-    UPDATE stocks SET s_qty=s_qty+2 WHERE mod(s_id,2)=1;
-    COMMIT;
-  END LOOP;
+		UPDATE stocks SET s_qty=s_qty - 1 WHERE s_id = src;
+		UPDATE stocks SET s_qty=s_qty + 1 WHERE s_id = dest;
+	END LOOP;
+	COMMIT;
 END;$$;
 
 CREATE OR REPLACE FUNCTION testsum (INT) RETURNS REAL AS
