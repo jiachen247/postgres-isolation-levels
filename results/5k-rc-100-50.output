@@ -1,0 +1,554 @@
+(base) jiachen@jiachensMBP407 postgres-isolation-levels % ./run.sh
+DROP DATABASE
+CREATE DATABASE
+psql:1-init_tables.sql:2: NOTICE:  table "stocks" does not exist, skipping
+DROP TABLE
+psql:1-init_tables.sql:3: NOTICE:  table "sumtable" does not exist, skipping
+DROP TABLE
+psql:1-init_tables.sql:4: NOTICE:  table "execution" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE PROCEDURE
+CREATE PROCEDURE
+CREATE PROCEDURE
+CREATE PROCEDURE
+UPDATE 5000
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27492 waits for ShareLock on transaction 2126203; blocked by process 27516.
+Process 27516 waits for ShareLock on transaction 2126260; blocked by process 27492.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (2,37) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27516 waits for ShareLock on transaction 2126314; blocked by process 27342.
+Process 27342 waits for ShareLock on transaction 2126281; blocked by process 27516.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,9) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27513 waits for ExclusiveLock on tuple (1,10) of relation 30554 of database 30552; blocked by process 27342.
+Process 27342 waits for ShareLock on transaction 2126339; blocked by process 27410.
+Process 27410 waits for ShareLock on transaction 2126295; blocked by process 27493.
+Process 27493 waits for ExclusiveLock on tuple (1,10) of relation 30554 of database 30552; blocked by process 27513.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27342 waits for ShareLock on transaction 2126339; blocked by process 27410.
+Process 27410 waits for ShareLock on transaction 2126295; blocked by process 27493.
+Process 27493 waits for ExclusiveLock on tuple (1,10) of relation 30554 of database 30552; blocked by process 27342.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,10) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27410 waits for ShareLock on transaction 2126295; blocked by process 27493.
+Process 27493 waits for ShareLock on transaction 2126339; blocked by process 27410.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (3,121) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27493 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27482.
+Process 27482 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ExclusiveLock on tuple (1,16) of relation 30554 of database 30552; blocked by process 27474.
+Process 27474 waits for ShareLock on transaction 2126421; blocked by process 27493.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27508 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27482.
+Process 27482 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126445; blocked by process 27474.
+Process 27474 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27508.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27491 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27482.
+Process 27482 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126445; blocked by process 27474.
+Process 27474 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27491.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27396 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27482.
+Process 27482 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126445; blocked by process 27474.
+Process 27474 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27396.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27482 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126445; blocked by process 27474.
+Process 27474 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27482.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (4,39) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27520 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27482.
+Process 27482 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126445; blocked by process 27474.
+Process 27474 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27520.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27438 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27482.
+Process 27482 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126445; blocked by process 27474.
+Process 27474 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27438.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27500 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27482.
+Process 27482 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126445; blocked by process 27474.
+Process 27474 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27500.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27468 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27482.
+Process 27482 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126445; blocked by process 27474.
+Process 27474 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27468.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27474 waits for ExclusiveLock on tuple (4,39) of relation 30554 of database 30552; blocked by process 27510.
+Process 27510 waits for ShareLock on transaction 2126423; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126445; blocked by process 27474.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27458 waits for ShareLock on transaction 2126545; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126564; blocked by process 27458.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (5,27) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27480 waits for ShareLock on transaction 2126571; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126585; blocked by process 27480.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (5,138) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27358 waits for ShareLock on transaction 2126716; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126724; blocked by process 27358.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (6,162) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27517 waits for ShareLock on transaction 2126747; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126750; blocked by process 27517.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (7,7) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27462 waits for ShareLock on transaction 2126794; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126797; blocked by process 27462.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,88) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27477 waits for ExclusiveLock on tuple (1,88) of relation 30554 of database 30552; blocked by process 27463.
+Process 27463 waits for ShareLock on transaction 2126794; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126854; blocked by process 27451.
+Process 27451 waits for ExclusiveLock on tuple (1,88) of relation 30554 of database 30552; blocked by process 27477.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27463 waits for ShareLock on transaction 2126794; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126854; blocked by process 27451.
+Process 27451 waits for ExclusiveLock on tuple (1,88) of relation 30554 of database 30552; blocked by process 27463.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,88) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27472 waits for ExclusiveLock on tuple (1,88) of relation 30554 of database 30552; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2126794; blocked by process 27456.
+Process 27456 waits for ShareLock on transaction 2126854; blocked by process 27451.
+Process 27451 waits for ExclusiveLock on tuple (1,88) of relation 30554 of database 30552; blocked by process 27472.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27456 waits for ShareLock on transaction 2126854; blocked by process 27451.
+Process 27451 waits for ExclusiveLock on tuple (1,88) of relation 30554 of database 30552; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2126794; blocked by process 27456.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (8,6) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27451 waits for ShareLock on transaction 2126862; blocked by process 27506.
+Process 27506 waits for ShareLock on transaction 2126859; blocked by process 27451.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (8,19) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27506 waits for ShareLock on transaction 2126857; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2126866; blocked by process 27506.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (8,30) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27392 waits for ShareLock on transaction 2126903; blocked by process 27349.
+Process 27349 waits for ExclusiveLock on tuple (8,136) of relation 30554 of database 30552; blocked by process 27490.
+Process 27490 waits for ShareLock on transaction 2126921; blocked by process 27392.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,105) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27498 waits for ExclusiveLock on tuple (8,136) of relation 30554 of database 30552; blocked by process 27490.
+Process 27490 waits for ShareLock on transaction 2126921; blocked by process 27392.
+Process 27392 waits for ShareLock on transaction 2126903; blocked by process 27349.
+Process 27349 waits for ExclusiveLock on tuple (8,136) of relation 30554 of database 30552; blocked by process 27498.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27502 waits for ShareLock on transaction 2126903; blocked by process 27349.
+Process 27349 waits for ShareLock on transaction 2126927; blocked by process 27504.
+Process 27504 waits for ExclusiveLock on tuple (1,105) of relation 30554 of database 30552; blocked by process 27502.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,105) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27349 waits for ShareLock on transaction 2126927; blocked by process 27504.
+Process 27504 waits for ShareLock on transaction 2126903; blocked by process 27349.
+HINT:  See server log for query details.
+CONTEXT:  while rechecking updated tuple (9,30) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27524 waits for ShareLock on transaction 2126969; blocked by process 27504.
+Process 27504 waits for ShareLock on transaction 2126988; blocked by process 27524.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (9,75) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27353 waits for ShareLock on transaction 2126992; blocked by process 27504.
+Process 27504 waits for ShareLock on transaction 2127012; blocked by process 27514.
+Process 27514 waits for ExclusiveLock on tuple (1,113) of relation 30554 of database 30552; blocked by process 27353.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,113) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27514 waits for ShareLock on transaction 2126992; blocked by process 27504.
+Process 27504 waits for ShareLock on transaction 2127012; blocked by process 27514.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,113) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27414 waits for ShareLock on transaction 2127053; blocked by process 27504.
+Process 27504 waits for ShareLock on transaction 2127044; blocked by process 27484.
+Process 27484 waits for ExclusiveLock on tuple (1,125) of relation 30554 of database 30552; blocked by process 27414.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,125) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27413 waits for ShareLock on transaction 2127053; blocked by process 27504.
+Process 27504 waits for ShareLock on transaction 2127044; blocked by process 27484.
+Process 27484 waits for ExclusiveLock on tuple (1,125) of relation 30554 of database 30552; blocked by process 27413.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,125) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27484 waits for ShareLock on transaction 2127053; blocked by process 27504.
+Process 27504 waits for ShareLock on transaction 2127044; blocked by process 27484.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,125) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27365 waits for ShareLock on transaction 2127046; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127089; blocked by process 27510.
+Process 27510 waits for ExclusiveLock on tuple (10,69) of relation 30554 of database 30552; blocked by process 27365.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (10,69) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27504 waits for ShareLock on transaction 2127046; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127089; blocked by process 27510.
+Process 27510 waits for ExclusiveLock on tuple (10,69) of relation 30554 of database 30552; blocked by process 27504.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (10,69) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27525 waits for ShareLock on transaction 2127046; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127089; blocked by process 27510.
+Process 27510 waits for ExclusiveLock on tuple (10,69) of relation 30554 of database 30552; blocked by process 27525.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (10,69) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27487 waits for ShareLock on transaction 2127046; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127089; blocked by process 27510.
+Process 27510 waits for ExclusiveLock on tuple (10,69) of relation 30554 of database 30552; blocked by process 27487.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (10,69) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27464 waits for ShareLock on transaction 2127046; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127089; blocked by process 27510.
+Process 27510 waits for ExclusiveLock on tuple (10,69) of relation 30554 of database 30552; blocked by process 27464.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (10,69) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27455 waits for ShareLock on transaction 2127046; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127089; blocked by process 27510.
+Process 27510 waits for ExclusiveLock on tuple (10,69) of relation 30554 of database 30552; blocked by process 27455.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (10,69) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27467 waits for ShareLock on transaction 2127046; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127089; blocked by process 27510.
+Process 27510 waits for ExclusiveLock on tuple (10,69) of relation 30554 of database 30552; blocked by process 27467.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (10,69) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27510 waits for ShareLock on transaction 2127046; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127089; blocked by process 27510.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (10,69) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27478 waits for ExclusiveLock on tuple (10,74) of relation 30554 of database 30552; blocked by process 27490.
+Process 27490 waits for ShareLock on transaction 2127092; blocked by process 27522.
+Process 27522 waits for ShareLock on transaction 2127094; blocked by process 27497.
+Process 27497 waits for ExclusiveLock on tuple (10,74) of relation 30554 of database 30552; blocked by process 27478.
+HINT:  See server log for query details.
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27490 waits for ShareLock on transaction 2127092; blocked by process 27522.
+Process 27522 waits for ShareLock on transaction 2127094; blocked by process 27497.
+Process 27497 waits for ExclusiveLock on tuple (10,74) of relation 30554 of database 30552; blocked by process 27490.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (10,74) in relation "stocks"
+SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27497 waits for ShareLock on transaction 2127092; blocked by process 27522.
+Process 27522 waits for ShareLock on transaction 2127094; blocked by process 27497.
+HINT:  See server log for query details.
+CONTEXT:  while locking tuple (10,74) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27522 waits for ShareLock on transaction 2127098; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127096; blocked by process 27522.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (1,141) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  deadlock detected
+DETAIL:  Process 27470 waits for ShareLock on transaction 2127206; blocked by process 27435.
+Process 27435 waits for ShareLock on transaction 2127207; blocked by process 27470.
+HINT:  See server log for query details.
+CONTEXT:  while updating tuple (10,17) in relation "stocks"
+SQL statement "update stocks set s_qty=val1 where s_id=num2"
+PL/pgSQL function swap(integer) line 18 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+CALL
+Gather Results for 5k-rc-100-50.output
+          avg          |      stddev       
+-----------------------+-------------------
+ 2438.1250000000000000 | 6460.535002122925
+(1 row)
+
+ stddev 
+--------
+      0
+(1 row)
+
+ xact_commit | xact_rollback | conflicts | deadlocks 
+-------------+---------------+-----------+-----------
+       20078 |            49 |         0 |        49
+(1 row)

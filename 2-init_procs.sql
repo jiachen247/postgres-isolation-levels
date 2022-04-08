@@ -1,54 +1,65 @@
--- $ psql -d isolation_exp -f INit_procs.sql
--- transfer 20 from src to dest
-CREATE OR REPLACE PROCEDURE updateTransaction()
-LANGUAGE plpgsql    
-AS $$
-BEGIN
-	FOR i IN 1..100
-  LOOP
-		UPDATE stocks SET s_qty=s_qty - 2 WHERE MOD(s_id, 2) = 0;
-		COMMIT;
-		UPDATE stocks SET s_qty=s_qty + 2 WHERE MOD(s_id, 2) = 1;
-		COMMIT;
-	END LOOP;
-END;$$;
+-- n is the max number of rows to which swap must occur
+create or replace procedure updatestocks(n int)
+language 'plpgsql'    
+as $$
+begin
+for i in 1..n
+loop
+update stocks set s_qty=i where s_id=i;
+end loop;
+end;$$;
 
-CREATE OR REPLACE FUNCTION testsum (INT) RETURNS REAL AS
-$$
+-- n is the max number of rows to which swap must occur
+create or replace procedure swap(n integer)
+language 'plpgsql'    
+as $$
 DECLARE
-r RECORD;
-p TEXT;
-e TEXT;
-query TEXT := 'SELECT SUM(s_qty) FROM stocks WHERE s_id<='||$1;
-ap NUMERIC := 0;
-ae NUMERIC := 0;
-BEGIN
-	FOR r IN EXECUTE 'EXPLAIN ANALYZE ' || query
-	LOOP
-		-- IF  r::TEXT LIKE '%Planning%'
-		-- THEN 
-		-- p := REGEXP_REPLACE( r::TEXT, '.*Planning (?:T|t)ime: (.*) ms.*', '\1');
-		-- END IF;
-		IF r::TEXT LIKE '%Execution%'
-		THEN
-		e := REGEXP_REPLACE( r::TEXT, '.*Execution (?:T|t)ime: (.*) ms.*', '\1');
-		END IF;
-	END LOOP;
-	ap := ap + (p::NUMERIC - ap) / 1;
-	ae := ae + (e::NUMERIC - ae) / 1;
--- RETURN ROUND(ap, 2) || ' : ' || ROUND(ae, 2) ;
--- Return only execution time
-	RETURN ae;
-END;
-$$ LANGUAGE plpgsql;
+num1 integer;
+num2 integer;
+val1 integer;
+val2 integer;
+t timestamptz;
+etime integer;
+begin
+t:=clock_timestamp();
+for i in 1..100
+loop
+num1:= floor(random()* (n) + 1);
+num2:= floor(random()* (n) + 1);
+select s_qty into val1 from stocks where s_id=num1;
+select s_qty into val2 from stocks where s_id=num2;
+update stocks set s_qty=val2 where s_id=num1;
+update stocks set s_qty=val1 where s_id=num2;
+	commit;
+end loop;
+end;$$;
 
-CREATE OR REPLACE PROCEDURE sumTransaction(n INTEGER)
-LANGUAGE 'plpgsql'    
-AS $$
-BEGIN
-FOR i IN 1..100
-LOOP
-INSERT INTO sumtable SELECT SUM(s_qty) FROM stocks WHERE s_id<=n;
-INSERT INTO execution SELECT testsum(n);
-END LOOP;
-END;$$;
+create or replace procedure swapTransaction(n integer, i text)
+language 'plpgsql'    
+as $$
+declare
+query TEXT := 'SET SESSION CHARACTERISTICS AS TRANSACTION ISOLATION LEVEL ' ||i;
+t timestamptz;
+etime integer;
+begin
+execute query;
+for i in 1..100
+loop
+t:=clock_timestamp();
+call swap(i);
+etime:= extract (milliseconds FROM (clock_timestamp() - t));
+insert into execution values(etime);
+end loop;
+end;$$;
+
+-- n  is the number of rows
+create or replace procedure sumTransaction(n integer)
+language 'plpgsql'    
+as $$
+begin
+for i in 1..100
+loop
+insert into sumtable select sum(s_qty) from stocks where s_id<=n;
+end loop;
+end;$$;
+

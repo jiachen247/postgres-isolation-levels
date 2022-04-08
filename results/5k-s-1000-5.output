@@ -1,0 +1,58 @@
+(base) jiachen@jiachensMBP407 postgres-isolation-levels % ./run.sh
+DROP DATABASE
+CREATE DATABASE
+psql:1-init_tables.sql:2: NOTICE:  table "stocks" does not exist, skipping
+DROP TABLE
+psql:1-init_tables.sql:3: NOTICE:  table "sumtable" does not exist, skipping
+DROP TABLE
+psql:1-init_tables.sql:4: NOTICE:  table "execution" does not exist, skipping
+DROP TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE PROCEDURE
+CREATE PROCEDURE
+CREATE PROCEDURE
+CREATE PROCEDURE
+UPDATE 5000
+ERROR:  could not serialize access due to concurrent update
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  could not serialize access due to concurrent update
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  could not serialize access due to concurrent update
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+ERROR:  could not serialize access due to concurrent update
+CONTEXT:  SQL statement "update stocks set s_qty=val2 where s_id=num1"
+PL/pgSQL function swap(integer) line 17 at SQL statement
+SQL statement "call swap(i)"
+PL/pgSQL function swaptransaction(integer,text) line 11 at CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+CALL
+Gather Results for 5k-s-1000-5.output
+         avg         |       stddev       
+---------------------+--------------------
+ 10.7100000000000000 | 2.8755148858223389
+(1 row)
+
+ stddev 
+--------
+      0
+(1 row)
+
+ xact_commit | xact_rollback | conflicts | deadlocks 
+-------------+---------------+-----------+-----------
+       15040 |             4 |         0 |         0
+(1 row)

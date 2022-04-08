@@ -14,6 +14,6 @@ CREATE TABLE sumtable(
 	addition INTEGER
 );
 
-CREATE TABLE execution(
-	execution REAL
-);
+CREATE TABLE IF NOT EXISTS execution(
+    execution_time integer
+)
