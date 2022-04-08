@@ -9,14 +9,13 @@ psql -d isolation_exp -f 5-set-isolation-level.sql
 psql -d isolation_exp -f 6-exp.sql
 
 # run processes and store pids in array
-for i in {1..50} 
+for i in {1..5} 
 do
-  src=$((1 + $RANDOM % 100))
-  dest=$((1 + $RANDOM % 100))
-  psql -d isolation_exp -c "call transferQty(${src}, ${dest});" &
-  pids[${i}]=$!;
   psql -d isolation_exp -c "call sumTransaction(100);" &
   spids[${i}]=$!;
+  psql -d isolation_exp -c "call updatetransaction();" &
+  pids[${i}]=$!;
+
 done
 
 # wait for all pids
@@ -31,7 +30,5 @@ done
 echo "Gather Results"
 
 echo "SELECT AVG(execution) FROM execution;" | psql -d isolation_exp
-echo "SELECT AVG(addition) FROM sumtable;" | psql -d isolation_exp
-# echo "SELECT * from pg_tables;" | psql -d isolation_exp
-# psql -d isolation_exp    
-# select * FROM stocks WHERE s_qty <> 10000;
+echo "SELECT COUNT(addition) FROM sumtable WHERE addition <> 1000000.000000000000;" | psql -d isolation_exp
+echo "SELECT xact_commit,xact_rollback,conflicts,deadlocks FROM pg_catalog.pg_stat_database where datname='isolation_exp';" | psql -d isolation_exp

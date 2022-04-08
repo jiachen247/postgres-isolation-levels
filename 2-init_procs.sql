@@ -1,15 +1,16 @@
 -- $ psql -d isolation_exp -f INit_procs.sql
 -- transfer 20 from src to dest
-CREATE OR REPLACE PROCEDURE transferQty(src INT, dest INT)
+CREATE OR REPLACE PROCEDURE updateTransaction()
 LANGUAGE plpgsql    
 AS $$
 BEGIN
 	FOR i IN 1..100
   LOOP
-		UPDATE stocks SET s_qty=s_qty - 1 WHERE s_id = src;
-		UPDATE stocks SET s_qty=s_qty + 1 WHERE s_id = dest;
+		UPDATE stocks SET s_qty=s_qty - 2 WHERE MOD(s_id, 2) = 0;
+		COMMIT;
+		UPDATE stocks SET s_qty=s_qty + 2 WHERE MOD(s_id, 2) = 1;
+		COMMIT;
 	END LOOP;
-	COMMIT;
 END;$$;
 
 CREATE OR REPLACE FUNCTION testsum (INT) RETURNS REAL AS
