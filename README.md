@@ -38,6 +38,6 @@ what to log:
 
 ### Results
 
-Results and output can be found in `./results/`
+Results and output can be found in `results/`
 
-5k-s-100-5.output
+For example: `5k-s-100-5.output`
